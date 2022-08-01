@@ -9,7 +9,7 @@ const PORT = 5000;
 // App
 const app = express();
 app.get('/', (req, res) => {
-  res.send('<h2 style="color: purple"> Sai Krishna App<h2>');
+  res.send('<h2 style="color: purple"> Sai Krishna Palakollu App<h2>');
 });
 
 app.listen(PORT);
