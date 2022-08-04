@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = "lakshitsainiceligo/nodewebnew"
+    registry = "lakshitsainiceligo/nodeweb"
     registryCredential = 'dockerhub'
     dockerImage = ''
   }
