@@ -3,6 +3,9 @@ pipeline {
     registry = "lakshitsainiceligo/nodeweb"
     registryCredential = 'dockerhub'
     dockerImage = ''
+    major = 1
+    minor = 0
+    patch = 0
   }
   agent any
   tools {nodejs "nodejs"}
@@ -38,7 +41,7 @@ pipeline {
     stage('Building docker image') {
       steps{
         script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+          dockerImage = docker.build(registry + ":$BUILD_NUMBER")
         }
       }
     }
@@ -51,8 +54,8 @@ pipeline {
       steps{
          script {
             docker.withRegistry('https://registry.hub.docker.com', registryCredential ) {
-            dockerImage.push("${env.BUILD_NUMBER}")            
-            dockerImage.push("latest")  
+            dockerImage.push("${major}.${minor}.${patch}.${env.BUILD_NUMBER}.0") 
+            // dockerImage.push("latest")  
           }
         }
       }
