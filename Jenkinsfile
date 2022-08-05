@@ -6,7 +6,7 @@ pipeline {
   }
   agent any
   tools {nodejs "nodejs"}
-  library 'shared_lib_demo'
+  @Library('shared_lib_demo') _
   stages {
     stage('Cloning Git') {
       steps {
