@@ -14,15 +14,20 @@ pipeline {
     }
     stage('Build') {
        steps {
-         sh 'npm install'
+         echo 'Building stage...'
        }
     }
-    stage('Test') {
+    stage('Unit Testing') {
       steps {
-        echo 'Testing stage...'
+        echo 'Generating code coverage...'
       }
     }
-    stage('Initialize') {
+    stage('Static code analysis') {
+      steps {
+        echo 'SCA TPL Scan...'
+      }
+    }
+    stage('Initializing docker') {
         steps{
             script{
                 def dockerHome = tool 'docker'
@@ -30,14 +35,19 @@ pipeline {
             }
         }
     }
-    stage('Building image') {
+    stage('Building docker image') {
       steps{
         script {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
       }
     }
-    stage('Deploy Image') {
+    stage('Container vulnerability scan') {
+      steps {
+        echo 'CV Scan....'
+      }
+    }
+    stage('Docker publish to dev repo') {
       steps{
          script {
             docker.withRegistry('https://registry.hub.docker.com', registryCredential ) {
