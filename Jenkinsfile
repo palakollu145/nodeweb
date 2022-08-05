@@ -8,15 +8,15 @@ pipeline {
   tools {nodejs "nodejs"}
   @Library('shared_lib_demo')_
   stages {
+    stage('Cloning Git') {
+      steps {
+        git 'https://github.com/lakshitsaini/nodeweb.git'
+      }
+    }
     stage('shared-lib-test'){
       steps{
         echo 'say Hello'
         sayHello 'saini'
-      }
-    }
-    stage('Cloning Git') {
-      steps {
-        git 'https://github.com/lakshitsaini/nodeweb.git'
       }
     }
     stage('Build') {
